@@ -21,11 +21,25 @@ class Camera {
 		this.rotAngle = vectorAngle(math.matrix([1,0,0]),this.direction)
 		this.rotAxis = math.cross(math.matrix([1,0,0]),this.direction)
 
-		if (this.rotAngle != 0) { // Why not work with quartenions and use the cos value instead?
+		if (math.norm(this.rotAxis) != 0) { // Why not work with quartenions and use the cos value instead?
 			this.transPosition = math.rotate(position, -this.rotAngle, this.rotAxis)
 		} else {
 			this.transPosition = this.position
 		}
+	}
+
+	toCanonical (vec) {
+		if (math.norm(this.rotAxis) != 0) {
+			vec = math.rotate(vec, -this.rotAngle, this.rotAxis)
+		}
+		vec = math.add(math.matrix(vec), math.subtract(math.matrix([-this.fov,0,0]), this.transPosition))
+		vec = math.rotate(vec, -this.rotation, math.matrix([1,0,0]))
+		return vec
+	}
+
+	renderPoint (point) {
+		point = this.toCanonical(point)
+		return math.intersect(point, [-this.fov, 0, 0], [1,0,0,0])
 	}
 }
 // initialize config variables
@@ -37,7 +51,8 @@ function init () {
 	ctx = canvas.getContext('2d')
 
 	const cam = new Camera()
-	console.log(cam)
+	console.log(cam.renderPoint([1,1,1]))
+	// console.log(cam)
 }
 
 // wait for the HTML to load
