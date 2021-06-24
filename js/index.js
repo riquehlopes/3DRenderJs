@@ -53,7 +53,35 @@ function init () {
 	const cam = new Camera()
 	console.log(cam.renderPoint([1,1,1]))
 	// console.log(cam)
+
+	ctx.fillRect(canvas.clientWidth/2 - 2.5,canvas.clientHeight/2 -2.5, 5, 5)
+	console.log(canvas.clientWidth,canvas.clientHeight)
+	
 }
+function brabo(){
+	console.log("brabo")
+}
+
+document.querySelector("body").addEventListener("keydown", function(event){
+	var key = event.key
+	switch(key){
+		case "ArrowLeft":
+			console.log("esquerda")
+			break
+
+		case "ArrowRight":
+			console.log("Direia")
+			break
+
+		case "ArrowUp":
+			console.log("Arriba")
+			break
+
+		case "ArrowDown":
+			console.log("Prabaxo")
+			break
+	}
+})
 
 // wait for the HTML to load
 document.addEventListener('DOMContentLoaded', init)
