@@ -19,18 +19,18 @@
   <h1>3DRenderJs</h1>
   <canvas id="3dRender" width="800" height="800"></canvas>
   <div id="arrow_style">
-    <button class="button">
+    <button class="button" onclick="move('up')">
       <div class="button_arrow" id="button_up"></div>
     </button>
     <div id="center">
-      <button class="button" onclick="brabo()">
+      <button class="button" onclick="move('left')">
         <div class="button_arrow" id="button_left"></div>
       </button>
-      <button name="button_right" class="button">
+      <button class="button" onclick="move('right')">
         <div class="button_arrow" id="button_right"></div>
       </button>
     </div>
-    <button class="button">
+    <button class="button" onclick="move('down')">
       <div class="button_arrow" id="button_down"></div>
     </button>
   </div>
