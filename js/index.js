@@ -43,12 +43,12 @@ class Cube {
 			let y = point[1]
 			ctx.fillRect(width/2 - 5 + x,height/2 - 5 - y, 10, 10)
 		}
-
+		ctx.beginPath()
 		for (let line of lines) {
 			ctx.moveTo(width/2 + line[0][0], height/2 - line[0][1])
 			ctx.lineTo(width/2 + line[1][0], height/2 - line[1][1])
-			ctx.stroke()
 		}
+		ctx.stroke()
 	}
 }
 
@@ -117,19 +117,27 @@ function init () {
 	cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 }
 function move(direction){
-	let step = 1
+	let step = 10
 	switch(direction){
 		case "up":
 			camera.transform([0,0,step])
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 		case "left":
 			camera.transform([0,step,0])
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 		case "right":
 			camera.transform([0,-step,0])
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 		case "down":
 			camera.transform([0,0,-step])
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 	}
 }
