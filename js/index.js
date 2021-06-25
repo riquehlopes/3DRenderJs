@@ -55,7 +55,7 @@ class Cube {
 // Camera declaration
 class Camera {
 	constructor (
-		position = [-1,0,0], fov = 100,
+		position = [-100,0,0], fov = 100,
 		direction = [1,0,0], rotation = 0
 	) {
 		this.position = math.matrix(position)
@@ -97,14 +97,22 @@ class Camera {
 		} else {
 			this.position = this.transPosition
 		}
-		console.log(this.position)
 
 		// Rotates camera direction vector in x,y,z
-		// TODO
+		this.rotation = this.rotation + rotate[0]
+		let new_direction = math.rotate([1,0,0], rotate[1], [0,1,0])
+		new_direction = math.rotate(new_direction, rotate[2], [0,0,1])
+		if (math.norm(this.rotAxis) != 0) {
+			new_direction = math.rotate(new_direction, this.rotAngle, this.rotAxis)
+		}
+		this.direction = math.divide(new_direction, math.norm(new_direction))
+
+		this.rotAngle = vectorAngle(math.matrix([1,0,0]),this.direction)
+		this.rotAxis = math.cross(math.matrix([1,0,0]),this.direction)
 	}
 }
 // initialize config variables
-let canvas, ctx, camera
+let canvas, ctx, camera, cube
 
 // setup config variables and start the program
 function init () {
@@ -116,48 +124,63 @@ function init () {
 	cube = new Cube([100, -100, -100], 200)
 	cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 }
+function update() {
+	ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+	cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
+}
 function move(direction){
 	let step = 10
 	switch(direction){
 		case "up":
 			camera.transform([0,0,step])
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
-			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 		case "left":
-			camera.transform([0,step,0])
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
-			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
+			camera.transform([0,-step,0])
 			break
 		case "right":
-			camera.transform([0,-step,0])
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
-			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
+			camera.transform([0,step,0])
 			break
 		case "down":
 			camera.transform([0,0,-step])
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
-			cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
 			break
 	}
+	requestAnimationFrame(update)
+}
+function rotate(direction){
+	let angle = Math.PI / 12
+	switch(direction){
+		case "y-":
+			camera.transform([0,0,0], [0,-angle,0])
+			break
+		case "z+":
+			camera.transform([0,0,0], [0,0,angle])
+			break
+		case "z-":
+			camera.transform([0,0,0], [0,0,-angle])
+			break
+		case "y+":
+			camera.transform([0,0,0], [0,angle,0])
+			break
+	}
+	requestAnimationFrame(update)
 }
 
 document.querySelector("body").addEventListener("keydown", function(event){
 	var key = event.key
-	switch(key){
-		case "ArrowUp":
+	switch(key.toLowerCase()){
+		case "w":
 			console.log("Arriba")
 			break
 
-		case "ArrowLeft":
+		case "a":
 			console.log("esquerda")
 			break
 
-		case "ArrowRight":
+		case "d":
 			console.log("Direia")
 			break
 
-		case "ArrowDown":
+		case "s":
 			console.log("Prabaxo")
 			break
 	}

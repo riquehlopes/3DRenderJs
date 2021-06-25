@@ -18,21 +18,42 @@
   <script src="js/index.js"></script>
   <h1>3DRenderJs</h1>
   <canvas id="3dRender" width="800" height="800"></canvas>
-  <div id="arrow_style">
-    <button class="button" onclick="move('up')">
-      <div class="button_arrow" id="button_up"></div>
-    </button>
-    <div id="center">
-      <button class="button" onclick="move('left')">
-        <div class="button_arrow" id="button_left"></div>
+  <div id="controls"> <!-- Definitelly not the best way to do this --!>
+    <div id="arrow_style">
+      <p>Move</p>
+      <button class="button" onclick="move('up')">
+        <div class="button_arrow" id="button_up"></div>
       </button>
-      <button class="button" onclick="move('right')">
-        <div class="button_arrow" id="button_right"></div>
+      <div id="center">
+        <button class="button" onclick="move('left')">
+          <div class="button_arrow" id="button_left"></div>
+        </button>
+        <button class="button" onclick="move('right')">
+          <div class="button_arrow" id="button_right"></div>
+        </button>
+      </div>
+      <button class="button" onclick="move('down')">
+        <div class="button_arrow" id="button_down"></div>
       </button>
     </div>
-    <button class="button" onclick="move('down')">
-      <div class="button_arrow" id="button_down"></div>
-    </button>
+    <!-- Basic rotation, still missing rotation around camera's own axis --!>
+    <div id="arrow_style">
+      <p>Rotate</p>
+      <button class="button" onclick="rotate('y-')">
+        <div class="button_arrow" id="button_up"></div>
+      </button>
+      <div id="center">
+        <button class="button" onclick="rotate('z-')">
+          <div class="button_arrow" id="button_left"></div>
+        </button>
+        <button class="button" onclick="rotate('z+')">
+          <div class="button_arrow" id="button_right"></div>
+        </button>
+      </div>
+      <button class="button" onclick="rotate('y+')">
+        <div class="button_arrow" id="button_down"></div>
+      </button>
+    </div>
   </div>
 </body>
 </html>
