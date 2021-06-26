@@ -123,6 +123,29 @@ function init () {
 
 	cube = new Cube([100, -100, -100], 200)
 	cube.draw(camera, ctx, canvas.clientWidth, canvas.clientHeight)
+
+	buttons = document.querySelectorAll('button')
+	canvas_div = document.querySelectorAll('div')
+	div_movement = canvas_div[0]
+	div_movement.onmouseover = show_buttons
+	div_movement.onmouseleave = hide_buttons
+	TouchEvent.touchstart = show_buttons
+}
+
+function show_buttons(){
+	buttons.forEach(
+		function(value){
+			value.style.display = 'inline'
+		}
+	)
+}
+
+function hide_buttons(){
+	buttons.forEach(
+		function(value){
+			value.style.display = 'none'
+		}
+	)
 }
 function update() {
 	ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
@@ -187,4 +210,4 @@ document.querySelector("body").addEventListener("keydown", function(event){
 })
 
 // wait for the HTML to load
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init,)

@@ -7,9 +7,7 @@
   <title>3DRenderJs</title>
   <meta name="description" content="A (very) basic Javascript 3D Render">
   <meta name="author" content="GNeulaender">
-
   <link rel="stylesheet" href="css/styles.css?v=1.0">
-
   <script src="js/math.js" type="text/javascript"></script>
 
 </head>
@@ -18,42 +16,15 @@
   <script src="js/index.js"></script>
   <h1>3DRenderJs</h1>
   <canvas id="3dRender" width="800" height="800"></canvas>
-  <div id="controls"> <!-- Definitelly not the best way to do this --!>
-    <div id="arrow_style">
-      <p>Move</p>
-      <button class="button" onclick="move('up')">
-        <div class="button_arrow" id="button_up"></div>
-      </button>
-      <div id="center">
-        <button class="button" onclick="move('left')">
-          <div class="button_arrow" id="button_left"></div>
-        </button>
-        <button class="button" onclick="move('right')">
-          <div class="button_arrow" id="button_right"></div>
-        </button>
-      </div>
-      <button class="button" onclick="move('down')">
-        <div class="button_arrow" id="button_down"></div>
-      </button>
-    </div>
-    <!-- Basic rotation, still missing rotation around camera's own axis --!>
-    <div id="arrow_style">
-      <p>Rotate</p>
-      <button class="button" onclick="rotate('y-')">
-        <div class="button_arrow" id="button_up"></div>
-      </button>
-      <div id="center">
-        <button class="button" onclick="rotate('z-')">
-          <div class="button_arrow" id="button_left"></div>
-        </button>
-        <button class="button" onclick="rotate('z+')">
-          <div class="button_arrow" id="button_right"></div>
-        </button>
-      </div>
-      <button class="button" onclick="rotate('y+')">
-        <div class="button_arrow" id="button_down"></div>
-      </button>
-    </div>
+  
+  <div class="div-buttons-movement">
+    <button name="up" class="button" onclick="move('up')">S</button>
+    <button name="rigth" class="button" onclick="move('right')">Q</button>
+    <button name="left" class="button" onclick="move('left')">R</button>
+    <button name="down" class="button" onclick="move('down')">T</button>
+  </div>
+  <div>
+    
   </div>
 </body>
 </html>
